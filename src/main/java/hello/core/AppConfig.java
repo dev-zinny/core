@@ -15,7 +15,6 @@ import hello.core.order.OrderServiceImpl;
 // 리팩토링 :: 역할이 드러나게 변경
 public class AppConfig {
 
-    // 생성자 주입
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
