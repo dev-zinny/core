@@ -8,25 +8,28 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-// 어플리케이션 전체를 설정하고 구성
-// 어플리케이션 실제 동작에 필요한 구현객체를 생성
-
-// 리팩토링 :: 역할이 드러나게 변경
+@Configuration
 public class AppConfig {
 
+    @Bean // 스프링컨테이너에 기본적으로 메서드 이름으로 빈등록 됨.
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
-    private MemoryMemberRepository memberRepository() {
+    @Bean
+    public MemoryMemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
+    @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
+    @Bean
     public DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
     }
